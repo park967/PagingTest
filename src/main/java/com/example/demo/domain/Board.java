@@ -18,7 +18,7 @@ public class Board {
     private String title;
     private String write;
     @ManyToOne
-    @JoinColumn(name = "uid")
+    @JoinColumn
     private users users;
 
 
