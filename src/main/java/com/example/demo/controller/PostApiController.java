@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.Post;
-import com.example.demo.repositories.PostRepository;
+import com.example.demo.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
@@ -19,13 +19,8 @@ import java.util.List;
 public class PostApiController {
 
     @Autowired
-    private PostRepository postRepository;
-
-
-
-
-
-        /*
+    private PostService postService;
+       /*
     @Operation(summary = "게시글 목록 조회")
     @GetMapping
     public ResponseEntity<List<Post>> getPostList() {
