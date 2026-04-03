@@ -1,9 +1,6 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -21,16 +18,24 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
     private String title;
-    private String context;
-    private long author; // SQL에서 INT 타입이므로 int로 선언
+    private String content;
+    @ManyToOne
+    @JoinColumn(name = "uid")
+    private users author;
     private long cnt;
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;
 
 
     public String getTitle(){
+
         return title;
     }
+
+    public String getContent() {
+        return content;
+    }
+
 
 }
 
