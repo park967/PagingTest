@@ -1,3 +1,17 @@
+
+#로컬 주소 포트
+
+sever:
+  port:8080
+servlet:
+  context-path: /api
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,application/json
+  error:
+    whitelabel:
+      enabled: false
+# db 자바랑 연결 이름과 비번 연결주소 일치
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mydb?useSSL=false&serverTimezone=Asia/Seoul
