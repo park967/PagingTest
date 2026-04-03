@@ -18,8 +18,8 @@ public class Board {
     private String title;
     private String write;
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Users users;
+    @JoinColumn(name = "uid")
+    private users users;
 
 
 }

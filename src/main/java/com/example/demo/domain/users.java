@@ -15,12 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Users {
+public class users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="gen1")
-    private long User_Id;
+    private long uid;
     private String name;
 
+    public String getName(){
+        return name;
+    }
 
 }
