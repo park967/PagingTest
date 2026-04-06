@@ -18,12 +18,18 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
-    PostRepository postRepository;
+
+    private final PostRepository postRepository;
 
     @Override
     public Post save(Post post) {
-        return postRepository.save(post);
+        Post postSave = Post.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getAuthor())
+                .build();
+
+        return postRepository.save(postSave);
     }
 
     @Override
@@ -37,15 +43,22 @@ public class PostServiceImpl implements PostService {
         return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Camping not found"));
     }
 
-  //  @Override
-   // public Post update(long id, Post post) {
-       // Post post = findbyId(id);
+    // update
+    @Override
+    @Transactional // 중요: 트랜잭션 안에서 엔티티를 변경해야 변경 감지가 동작합니다.
+    public Post update(long id, Post post) {
+        // 1. 수정할 기존 데이터를 먼저 조회합니다.
+        Post postUpdate = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+        postUpdate.setTitle(post.getTitle());
+        postUpdate.setContent(post.getContent());
 
-      //  return ;
-   // }
 
-  //  @Override public void delete(long id) {
-   //     postRepository.deleteById(id);
+        return postUpdate;
+    }
 
-   // }
+    @Override public void delete(long id) {
+       postRepository.deleteById(id);
+
+   }
 }

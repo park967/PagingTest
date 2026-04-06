@@ -15,8 +15,8 @@ public interface PostService {
     // 기본키로 읽기
     Post findbyId( long id);
     //수정
-  //  Post update(long id, Post post);
+    Post update(long id, Post post);
     //데이터 삭제
- //   void delete(long id);
+     void delete(long id);
 
 }

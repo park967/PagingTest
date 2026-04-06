@@ -5,9 +5,7 @@ import com.example.demo.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostApiController {
 
-    @Autowired
-    PostService postService;
+    private final PostService postService; // @RequiredArgsConstructor와 final을 사용하면 @Autowired 생략 가능 (권장 방식)
 
     // 1. 게시글 등록
     @Operation(summary = "게시글 등록")
@@ -39,17 +36,25 @@ public class PostApiController {
 
     // 3. 게시글 단건 조회
     @Operation(summary = "게시글 상세 조회")
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") // 상단 @RequestMapping에 의해 /api/posts/{id}가 됨
     public ResponseEntity<Post> getPost(@PathVariable Long id) {
         Post post = postService.findbyId(id);
         return ResponseEntity.ok(post);
     }
 
-    /* 4. 게시글 수정
-
+    // 4. 게시글 수정
+    @Operation(summary = "게시글 수정")
+    @PutMapping("/{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post postDetails) {
+        Post updatedPost = postService.update(id, postDetails);
+        return ResponseEntity.ok(updatedPost);
+    }
 
     // 5. 게시글 삭제
-
-    */
-
+    @Operation(summary = "게시글 삭제")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        postService.delete(id);
+        return ResponseEntity.noContent().build(); // 204 No Content 반환
+    }
 }

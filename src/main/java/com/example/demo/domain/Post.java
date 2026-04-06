@@ -1,33 +1,35 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-
 @Data
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Post {
 
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
     private String title;
     private String content;
-    @ManyToOne
-    @JoinColumn(name = "uid")
-    private users author;
+    private String author;
     private long cnt;
+    @CreatedDate
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;
 
 
-    public String getTitle(){
+    public String getTitle() {
 
         return title;
     }
@@ -37,5 +39,14 @@ public class Post {
     }
 
 
+    public String getAuthor() {
+
+        return author;
+    }
+
 }
+
+
+
+
 

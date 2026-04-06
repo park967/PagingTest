@@ -9,9 +9,9 @@ public class PostResponseDto {
     private String author;
 
     public PostResponseDto(Post post){
-        this.title = post.getTitle();
+    //    this.title = post.getTitle();
         this.content =post.getContent();
-        this.author = post. getAuthor().getName();
+        this.author = post. getAuthor();
     }
 
 }
