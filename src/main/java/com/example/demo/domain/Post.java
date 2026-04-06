@@ -1,11 +1,9 @@
 package com.example.demo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 @Data
@@ -19,13 +17,15 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long postId;
+    @Column(name = "post_id")
+    private long id;
     private String title;
     private String content;
     private String author;
     private long cnt;
     @CreatedDate
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
 
