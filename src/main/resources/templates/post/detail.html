@@ -21,5 +21,27 @@
 </form>
 <a href="/posts">목록으로</a>
 
+<hr>
+<h3>댓글 (<span th:text="${#lists.size(post.comments)}"></span>)</h3>
+
+<ul>
+    <li th:each="comment : ${post.comments}">
+        <strong th:text="${comment.author}"></strong>:
+        <span th:text="${comment.content}"></span>
+        <small th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></small>
+        <form th:action="@{/posts/{postId}/comments/{commentId}/delete(postId=${post.id}, commentId=${comment.id})}"
+              method="post" style="display:inline;">
+            <button type="submit">삭제</button>
+        </form>
+    </li>
+</ul>
+<p>댓글작성 부분 하려면  유저 db 하나더 필요할듯?  </p>p
+<h4>댓글 작성</h4>
+<form th:action="@{/posts/{postId}/comments(postId=${post.id})}" method="post">
+    <input type="hidden" name="postId" th:value="${post.id}">
+    작성자: <input type="text" name="author" required><br>
+    내용: <textarea name="content" required></textarea><br>
+    <button type="submit">댓글 등록</button>
+</form>
 </body>
 </html>
